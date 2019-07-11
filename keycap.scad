@@ -24,7 +24,8 @@ module rounded_cube (size, r) {
   }
 }
 
-function dish_r(w, d) = (w * w + 4 * d * d) / (8 * d);
+// w * 1.2 ≒ √2 （対角線の長さ）
+function dish_r(w, d) = (w * 1.2 * w * 1.2 + 4 * d * d) / (8 * d);
 
 module keycap_outer_shape (key_bottom_size, key_top_size, key_top_height, angle, dish_depth) {
   difference () {
@@ -37,7 +38,7 @@ module keycap_outer_shape (key_bottom_size, key_top_size, key_top_height, angle,
     translate([0, 0, key_top_height])
       rotate([- angle, 0, 0])
         translate([0, 0, dish_r(key_top_size, dish_depth) - dish_depth])
-          rotate([90, 0, 0])
+          rotate([90, 0, 30])
             cylinder(r = dish_r(key_top_size, dish_depth), h = 60, /* 適当に十分な長さ */ center = true);
   }
 }
